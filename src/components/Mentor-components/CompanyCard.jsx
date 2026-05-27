@@ -1,38 +1,41 @@
 import { ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const companies = [
   {
     name: "Amazon",
     logo: "https://d8it4huxumps7.cloudfront.net/uploads/images/6821cc8a863ce_amazon.png",
-    href: "/find-a-mentor",
+    filter: "Amazon",
   },
   {
     name: "Google",
     logo: "https://d8it4huxumps7.cloudfront.net/uploads/images/6821cc9a9ba3b_google.png",
-    href: "/find-a-mentor",
+    filter: "Google",
   },
   {
     name: "Microsoft",
     logo: "https://d8it4huxumps7.cloudfront.net/uploads/images/682b139fd4ecc_microsoft.png",
-    href: "/find-a-mentor",
+    filter: "Microsoft",
   },
   {
     name: "IBM",
     logo: "https://d8it4huxumps7.cloudfront.net/uploads/images/682b139023523_ibm.png",
-    href: "/find-a-mentor",
+    filter: "IBM",
   },
   {
     name: "Flipkart",
     logo: "https://d8it4huxumps7.cloudfront.net/uploads/images/6821cd4035042_flipkart.png",
-    href: "/find-a-mentor",
+    filter: "Flipkart",
   },
 ];
 
-function CompanyCard({ name, logo, href }) {
+function CompanyCard({ name, logo, filter }) {
   return (
-    <a
-      href={href}
-      className="group rounded-2xl border border-gray-200 w-[230px] transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"    >
+    <Link
+      to="/mentorship"
+      state={{ company: name }}
+      className="group rounded-2xl border border-gray-200 w-[230px] transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+    >
       <div className=" flex items-center justify-center h-28 bg-gray-50 rounded-2xl m-1">
         <div className="bg-white rounded-full w-18 h-18 flex items-center justify-center shadow-sm">
           <img
@@ -53,7 +56,7 @@ function CompanyCard({ name, logo, href }) {
           className="text-gray-400 group-hover:text-indigo-600 transition"
         />
       </div>
-    </a>
+    </Link>
   );
 }
 
@@ -69,7 +72,7 @@ export default function TopCompanies() {
           </h2>
         </div>
 
-        <div className="flex justify-between overflow-visible">
+        <div className="flex justify-between flex-wrap gap-4 overflow-visible">
           {companies.map((company) => (
             <CompanyCard
               key={company.name}

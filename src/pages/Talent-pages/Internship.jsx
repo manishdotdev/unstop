@@ -1,14 +1,7 @@
 import { useState } from "react";
-import { Search, MapPin, Clock, Banknote, Flame, Sparkles, ArrowRight, Star, Info, ChevronDown, SlidersHorizontal, X, Bookmark, Building2 } from "lucide-react";
+import { Search, MapPin, Clock, Banknote, Sparkles, ArrowRight, Star, Info, ChevronDown, SlidersHorizontal, X, Bookmark } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-const internships = [
-  { id: 1, title: "Frontend Developer Internship", company: "Google", location: "Remote", duration: "3 Months", stipend: "₹20k/month", rating: 4.8, match: 92, skills: ["React", "JavaScript", "Tailwind"], logo: "https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg", posted: "2 days ago", trending: true, type: "Full-time" },
-  { id: 2, title: "AI Research Internship", company: "OpenAI", location: "Remote", duration: "6 Months", stipend: "₹40k/month", rating: 4.9, match: 95, skills: ["Python", "AI", "Machine Learning"], logo: "https://upload.wikimedia.org/wikipedia/commons/1/13/ChatGPT-Logo.png", posted: "1 day ago", trending: true, type: "Full-time" },
-  { id: 3, title: "Product Design Internship", company: "Adobe", location: "Hybrid", duration: "4 Months", stipend: "₹18k/month", rating: 4.6, match: 80, skills: ["Figma", "UI", "UX"], logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo_and_wordmark.svg", posted: "3 days ago", trending: false, type: "Part-time" },
-  { id: 4, title: "Data Science Internship", company: "Microsoft", location: "On-site", duration: "3 Months", stipend: "₹25k/month", rating: 4.7, match: 87, skills: ["Python", "SQL", "Power BI"], logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg", posted: "Today", trending: true, type: "Full-time" },
-  { id: 5, title: "Marketing Intern", company: "Meta", location: "Remote", duration: "2 Months", stipend: "₹15k/month", rating: 4.4, match: 74, skills: ["Marketing", "Analytics", "SEO"], logo: "https://static.xx.fbcdn.net/rsrc.php/y9/r/tL_v571NdZ0.svg", posted: "5 days ago", trending: false, type: "Part-time" },
-  { id: 6, title: "Backend Engineer Intern", company: "Stripe", location: "Hybrid", duration: "6 Months", stipend: "₹35k/month", rating: 4.8, match: 89, skills: ["Node.js", "API", "PostgreSQL"], logo: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg", posted: "2 days ago", trending: true, type: "Full-time" },
-];
+import { internships } from "../../data/internshipsData";
 
 const companies = ["Google", "Amazon", "Microsoft", "OpenAI", "Adobe", "Stripe", "Meta"];
 const filterOptions = ["Remote", "Part Time", "AI", "Design", "Marketing", "Engineering", "Data Science"];
@@ -206,7 +199,7 @@ function InternshipCard({ job }) {
           Posted {job.posted}
         </span>
 
-        <button onClick={() => navigate("/internshipdetail")}
+        <button onClick={() => navigate(`/internshipdetail/${job.id}`)}
           className="
           flex items-center gap-1
           text-[13px]
@@ -304,34 +297,41 @@ export default function InternshipsPage() {
   const parseStipend = (s) => parseInt(s.replace(/[^\d]/g, "")) * (s.includes("k") ? 1000 : 1);
   const clearAll = () => { setSearch(""); setCheckedFilters([]); setCheckedCompanies([]); setStipend(0); };
 
-  const filtered = internships
-    .filter(j => {
-      const q = search.toLowerCase();
-      const matchSearch = !q || j.title.toLowerCase().includes(q) || j.company.toLowerCase().includes(q) || j.skills.some(s => s.toLowerCase().includes(q));
-      const matchCompany = checkedCompanies.length === 0 || checkedCompanies.includes(j.company);
-      const matchStipend = parseStipend(j.stipend) >= stipend;
-      return matchSearch && matchCompany && matchStipend;
-    })
-    .sort((a, b) => {
-      if (sort === "stipend") return parseStipend(b.stipend) - parseStipend(a.stipend);
-      if (sort === "newest") return a.posted.localeCompare(b.posted);
-      return b.match - a.match;
-    });
+   const filtered = internships
+     .filter(j => {
+       const q = search.toLowerCase();
+       const matchSearch = !q || j.title.toLowerCase().includes(q) || j.company.toLowerCase().includes(q) || j.skills.some(s => s.toLowerCase().includes(q));
+       const matchCompany = checkedCompanies.length === 0 || checkedCompanies.includes(j.company);
+       const matchStipend = parseStipend(j.stipend) >= stipend;
+       const matchFilters = checkedFilters.length === 0 || checkedFilters.some(f => {
+         const fLower = f.toLowerCase();
+         if (fLower === "remote") return j.location.toLowerCase().includes("remote");
+         if (fLower === "part time") return j.type.toLowerCase().includes("part") || j.type.toLowerCase().includes("part-time");
+         // For skill/domain filters
+         return j.skills.some(s => s.toLowerCase().includes(fLower)) || j.title.toLowerCase().includes(fLower) || j.company.toLowerCase().includes(fLower);
+       });
+       return matchSearch && matchCompany && matchStipend && matchFilters;
+     })
+     .sort((a, b) => {
+       if (sort === "stipend") return parseStipend(b.stipend) - parseStipend(a.stipend);
+       if (sort === "newest") return a.posted.localeCompare(b.posted);
+       return b.match - a.match;
+     });
 
   const sidebarProps = { checkedFilters, setCheckedFilters, checkedCompanies, setCheckedCompanies, stipend, setStipend, onClear: clearAll };
 
-  return (
-    <div style={{ background: "linear-gradient(135deg, #dce8f8 0%, #eef1fb 50%, #dde8f5 100%)", fontFamily: "'DM Sans', system-ui, sans-serif", minHeight: "100vh" }}>
+return (
+        <div className="min-h-screen bg-white pb-20 lg:pb-0" style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}>
 
-      <div className=" backdrop-blur border-b border-slate-200 py-10">
-        <div className="max-w-7xl mx-auto px-6">
-          <p className="text-[11px] font-bold text-indigo-500 uppercase tracking-widest mb-2">Opportunities</p>
-          <h1 className="text-[36px] font-black text-slate-900 leading-none" style={{ letterSpacing: "-0.03em" }}>
-            Find Your Perfect <span className="text-indigo-500">Internship</span>
-          </h1>
-          <p className="text-slate-500 mt-2 text-[14px]">27,000+ paid, remote & on-site roles waiting for you</p>
+            <div className="bg-gradient-to-br from-[#dce8f8] via-[#eef1fb] to-[#dde8f5] px-6 pt-8 pb-6 border-b border-slate-200">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                    <p className="text-[11px] font-bold text-indigo-500 uppercase tracking-widest mb-2">Opportunities</p>
+                    <h1 className="text-[28px] sm:text-[36px] font-black text-slate-900 leading-none" style={{ letterSpacing: "-0.03em" }}>
+                        Find Your Perfect <span className="text-indigo-500">Internship</span>
+                    </h1>
+                    <p className="text-slate-500 mt-2 text-[14px]">27,000+ paid, remote & on-site roles waiting for you</p>
 
-          <div className="mt-5 relative max-w-2xl flex gap-3">
+          <div className="mt-5 relative max-w-2xl flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
               <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
               <input
@@ -348,7 +348,7 @@ export default function InternshipsPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="flex gap-6 items-start">
 
           <aside className="hidden lg:block w-56 flex-shrink-0 sticky top-6">

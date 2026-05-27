@@ -1,6 +1,6 @@
 import { ChevronRight, LogOut, Pencil } from "lucide-react"
 import { useNavigate } from "react-router-dom"
-const ProfileDropdown = () => {
+const ProfileDropdown = ({ onProfileSelect, onLogoutSelect }) => {
   const navigate = useNavigate();
   return (
     <div className="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-2xl border border-gray-200 z-[999]">
@@ -19,14 +19,14 @@ const ProfileDropdown = () => {
                   className="w-14 h-14 rounded-full object-cover"
                 />
               </div>
-              <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 text-xs font-semibold text-yellow-600">
+              <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-xs font-semibold text-yellow-600">
                 17%
               </span>
             </div>
 
             <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 px-3 py-2 rounded-lg transition">
               <Pencil size={16} className="text-gray-600" />
-              <span className="text-sm font-medium text-gray-800" onClick={() => navigate("/user")}>
+              <span className="text-sm font-medium text-gray-800" onClick={onProfileSelect}>
                 Edit Profile
               </span>
               <ChevronRight size={16} className="text-gray-400" />
@@ -35,10 +35,10 @@ const ProfileDropdown = () => {
 
           <div className="mt-4">
             <div className="text-lg font-bold text-gray-900">
-              Manish Sharma
+              Divyansh Choudhary
             </div>
             <div className="text-sm text-gray-500">
-              manishsharma.dev56@gmail.com
+              user@gmail.com
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@ const ProfileDropdown = () => {
       </div>
 
       <div className="border-t border-gray-200 p-3">
-        <button className="flex items-center gap-3 w-full px-4 py-2 rounded-xl text-red-600 hover:bg-red-50 transition">
+        <button className="flex items-center gap-3 w-full px-4 py-2 rounded-xl text-red-600 hover:bg-red-50 transition" onClick={onLogoutSelect}>
           <LogOut size={18} />
           <span className="font-medium">Logout</span>
         </button>

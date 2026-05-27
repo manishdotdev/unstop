@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { mentors as mentorsData } from "../../data/mentorsData";
 
 const colorThemes = {
   green: {
@@ -24,113 +26,22 @@ const colorThemes = {
   },
 };
 
-const mentors = [
-  {
-    name: "Eden Saha",
-    rating: "4.5",
-    reviews: "270",
-    description:
-      "Program Manager at Unstop | IIM A, B, C, L and FSM, Delhi Competition Winner | Former Member, Corporate Relations & Placement Division at FSM, New Delhi | Scholarship Holder at CU, Blr",
-    photo: "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/694048ee05de6.webp?d=150x150",
-    isTop: true,
-    color: "green",
-  },
-  {
-    name: "Ankit Aggarwal",
-    rating: "4.8",
-    reviews: "157",
-    description:
-      "Founder & CEO, Unstop | Where Employers Attract, Assess and Hire 11 Million GenZs",
-    photo: "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/66d82578dc9e8.webp?d=150x150",
-    isTop: false,
-    color: "blue",
-  },
-  {
-    name: "Vedansh Dubey",
-    rating: "4.9",
-    reviews: "344",
-    description:
-      "Assistant Manager HR @Wipro | MBA @XIMB, Ex-TCS, Nestlé, HT Media | National Winner Tata Steel-a-thon | 150+ Case Competitions",
-    photo: "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/66e689b11a7f1.webp?d=150x150",
-    isTop: true,
-    color: "purple",
-  },
-  {
-    name: "Palak Gupta",
-    rating: "4.9",
-    reviews: "152",
-    description:
-      "Consulting Analyst @Accenture | MBA (Gold Medalist) @IIM Indore, Ex-IBM, Michael Page, ABG | Top Icons of India, 1000+ Mentored",
-    photo: "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/65e2d4ade1037.webp?d=150x150",
-    isTop: true,
-    color: "pink",
-  },
-  {
-    name: "Dhananjay Sharma",
-    rating: "4.9",
-    reviews: "150",
-    description:
-      "Corporate Finance Manager @ Somany Impresa Group | IIM Ranchi MBA'24 (Director's Merit List) | Ex-J.P. Morgan Chase & Co. Intern",
-    photo: "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/679e3964c1cb8.webp?d=150x150",
-    isTop: true,
-    color: "blue",
-  },
-  {
-    name: "Shiri Agarwal",
-    rating: "4.9",
-    reviews: "257",
-    description:
-      "Product @Telstra | MBA @MDI Gurgaon'24 | Rank 6th Unstoppable Mentor | 34 Case Comps Podiums | 97.11 %ile CAT 2021 | Ex Amazon intern | Traveled 19 Countries",
-    photo: "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/6608ff032d283.webp?d=150x150",
-    isTop: true,
-    color: "purple",
-  },
-  {
-    name: "Vaibhav Sharma",
-    rating: "4.8",
-    reviews: "135",
-    description:
-      "Strategy @ Meesho | IIM Lucknow | Top 15 Unstoppable Mentor | Winner & Finalist - 23+ Nat'l Case Competition",
-    photo: "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/6629fb360759b.webp?d=150x150",
-    isTop: true,
-    color: "pink",
-  },
-  {
-    name: "Rutwik Borkar",
-    rating: "4.9",
-    reviews: "274",
-    description:
-      "Flipkart | Bain & Co. | Gold Medalist, IIT Madras | XLRI Jamshedpur-BM'24 | Accenture, Wipro (PPI) | P&G, Nestle, PepsiCo LPs | 10+ Corporate Case Comp | HUL Changemakers'22 | KVPY Scholar",
-    photo: "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/663c31ccbc761.webp?d=150x150",
-    isTop: true,
-    color: "purple",
-  },
-  {
-    name: "Riya Shrivastava",
-    rating: "4.8",
-    reviews: "262",
-    description:
-      "Strategy - CXO's Office @SBI Life | MBA @BITSOM, Ex-Bosch, HP Tech Ventures, Cervin | Founder - Careerlyweb",
-    photo: "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/65e85c8962e7b.webp?d=150x150",
-    isTop: true,
-    color: "blue",
-  },
-  {
-    name: "Yash Patel",
-    rating: "4.8",
-    reviews: "272",
-    description:
-      "Strategy Manager @ Parag Milk Foods (MD's Office) | 300k+ Impressions | 32x National Case Comp Podiums | Dual MBA – MDI Gurgaon & ESCP Europe | Ex-eBay, L&T",
-    photo: "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/660a857811b6d.webp?d=150x150",
-    isTop: true,
-    color: "purple",
-  },
-];
+const mentors = mentorsData.map((m, i) => ({
+    id: m.id,
+    name: m.name,
+    rating: m.rating.toString(),
+    reviews: m.reviews.toString(),
+    description: m.experience.split("|")[0]?.trim() || m.about || "",
+    photo: m.photo,
+    isTop: m.isTopMentor,
+    color: ["green", "blue", "purple", "pink"][i % 4],
+  }));
 
 const CARD_WIDTH = 305 + 16;
 
 function MentorCard({ mentor }) {
   const theme = colorThemes[mentor.color];
+  const navigate = useNavigate();
   return (
     <div
       className={`flex-shrink-0 w-[305px] bg-white rounded-2xl border-t-4 ${theme.border} shadow-sm overflow-hidden flex justify-center items-center flex-col `}
@@ -181,6 +92,7 @@ function MentorCard({ mentor }) {
         </p>
 
         <button
+          onClick={() => navigate(`/mentordetail/${mentor.id}`)}
           className={`w-full border rounded-full py-1.5 text-xs font-semibold transition-colors duration-150 ${theme.btn}`}
         >
           View Profile
@@ -253,17 +165,15 @@ export default function TopMentors() {
             </div>
           </div>
 
-          <a
-            href="/find-a-mentor?tops=TopMentors"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            to="/mentorship"
             className="flex items-center gap-1.5 px-4 py-1.5 border border-blue-300 rounded-full text-sm font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 transition whitespace-nowrap"
           >
             View All
             <span className="w-5 h-5 rounded-full bg-blue-700 flex items-center justify-center">
               <ArrowRight size={10} className="text-white" />
             </span>
-          </a>
+          </Link>
         </div>
 
         <div className="relative ">

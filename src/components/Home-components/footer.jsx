@@ -10,12 +10,12 @@ export default function Footer() {
       <div className="absolute w-[500px] h-[500px] bg-indigo-600/30 blur-[120px] rounded-full top-[-150px] left-[-100px] animate-pulse"/>
       <div className="absolute w-[400px] h-[400px] bg-purple-600/20 blur-[120px] rounded-full bottom-[-100px] right-[-80px] animate-pulse"/>
 
-      <div className="max-w-7xl mx-auto px-6 py-24 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 relative z-10">
 
         {/* Center Hub */}
-        <div className="text-center max-w-2xl mx-auto mb-20">
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-20">
 
-          <h2 className="text-4xl font-bold leading-tight">
+          <h2 className="text-2xl sm:text-4xl font-bold leading-tight">
             Ready to discover your next opportunity?
           </h2>
 
@@ -32,7 +32,7 @@ export default function Footer() {
 
 
         {/* Glass navigation grid */}
-        <div className="grid md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
 
           {/* Brand */}
           <div className="space-y-4">

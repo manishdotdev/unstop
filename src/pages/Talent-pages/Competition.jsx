@@ -200,7 +200,7 @@ function CompetitionCard({ job }) {
                 </span>
 
                 <button
-                    onClick={() => navigate("/competitiondetail")}
+                    onClick={() => navigate(`/competitiondetail/${job.id}`)}
                     className="
           flex items-center gap-1
           text-[13px]
@@ -296,17 +296,17 @@ export default function CompetitionsPage() {
     const sidebarProps = { checkedFilters, setCheckedFilters, checkedCompanies, setCheckedCompanies, onClear: clearAll };
 
     return (
-        <div style={{ background: "linear-gradient(135deg, #dce8f8 0%, #eef1fb 50%, #dde8f5 100%)", fontFamily: "'DM Sans', system-ui, sans-serif", minHeight: "100vh" }}>
+        <div className="min-h-screen bg-white pb-20 lg:pb-0" style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}>
 
-            <div className="backdrop-blur border-b border-slate-200 py-10">
-                <div className="max-w-7xl mx-auto px-6">
+            <div className="bg-gradient-to-br from-[#dce8f8] via-[#eef1fb] to-[#dde8f5] px-6 pt-8 pb-6 border-b border-slate-200">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6">
                     <p className="text-[11px] font-bold text-indigo-500 uppercase tracking-widest mb-2">Competitions</p>
-                    <h1 className="text-[36px] font-black text-slate-900 leading-none" style={{ letterSpacing: "-0.03em" }}>
+                    <h1 className="text-[28px] sm:text-[36px] font-black text-slate-900 leading-none" style={{ letterSpacing: "-0.03em" }}>
                         Find Student <span className="text-indigo-500">Competitions</span>
                     </h1>
                     <p className="text-slate-500 mt-2 text-[14px]">Hackathons, quizzes & challenges — win prizes & recognition</p>
 
-                    <div className="mt-5 relative max-w-2xl flex gap-3">
+                    <div className="mt-5 relative max-w-2xl flex flex-col sm:flex-row gap-3">
                         <div className="relative flex-1">
                             <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
                             <input
@@ -323,7 +323,7 @@ export default function CompetitionsPage() {
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-6 py-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
                 <div className="flex gap-6 items-start">
 
                     <aside className="hidden lg:block w-56 flex-shrink-0 sticky top-6">

@@ -6,6 +6,7 @@ import ProCards from "../../components/Mentor-components/Procards"
 import BecomeMentorCard from "../../components/Mentor-components/BecomeMentorCard";
 import FAQSection from "../../components/Mentor-components/FAQSection"
 import Footer from "../../components/Home-components/footer";
+import { Link } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import {
     FaFileAlt,
@@ -18,7 +19,7 @@ import {
     FaGlobe,
     FaCode,
 } from "react-icons/fa";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
 const categories = [
     { title: "CV Review", color: "blue", icon: <FaFileAlt /> },
@@ -171,9 +172,10 @@ export default function MentorshipHero() {
                             className="flex gap-4 transition-transform duration-300 ease-out"
                         >
                             {categories.map((item, index) => (
-                                <a
+                                <Link
                                     key={index}
-                                    href="#"
+                                    to="/mentorship"
+                                    state={{ category: item.title }}
                                     className={`${getColorClasses(item.color)} min-w-[136px] min-h-[50px] rounded-2xl flex flex-col items-center justify-center gap-3 px-3 py-1 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border border-transparent hover:border-gray-200`}
                                 >
                                     <div className="w-12 h-12 rounded-xl flex items-center justify-center text-[#00264d] text-lg">
@@ -182,7 +184,7 @@ export default function MentorshipHero() {
                                     <span className="text-[12px] font-bold text-[#00264d] text-center leading-snug">
                                         {item.title}
                                     </span>
-                                </a>
+                                </Link>
                             ))}
                         </div>
                     </div>

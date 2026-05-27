@@ -1,0 +1,160 @@
+export const applicationsHistory = [
+  {
+    id: 1,
+    positionId: 1,
+    positionType: "internship",
+    positionTitle: "Frontend Developer Internship",
+    company: "Google",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg",
+    location: "Remote",
+    stipend: "₹20,000/month",
+    duration: "3 Months",
+    appliedDate: "2026-05-15T10:30:00Z",
+    status: "approved",
+    statusUpdated: "2026-05-20T14:00:00Z",
+    recruiter: {
+      name: "Sarah Johnson",
+      title: "Technical Recruiter",
+      email: "sarah.johnson@google.com",
+      phone: "+1 (555) 123-4567",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+    },
+    messages: [
+      {
+        id: 1,
+        sender: "recruiter",
+        message: "Hi Divyansh, thanks for applying to Google's Frontend Developer Internship. Your profile looks great and we'd like to move forward with your application.",
+        timestamp: "2026-05-20T14:00:00Z",
+      },
+      {
+        id: 2,
+        sender: "user",
+        message: "Thank you for the update! I'm excited about this opportunity. Can you tell me more about the next steps?",
+        timestamp: "2026-05-21T09:15:00Z",
+      },
+      {
+        id: 3,
+        sender: "recruiter",
+        message: "We'll be scheduling a technical interview next week. Please keep an eye on your email for the calendar invite.",
+        timestamp: "2026-05-21T11:30:00Z",
+      },
+    ],
+  },
+  {
+    id: 2,
+    positionId: 2,
+    positionType: "internship",
+    positionTitle: "AI Research Internship",
+    company: "OpenAI",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/1/13/ChatGPT-Logo.png",
+    location: "Remote",
+    stipend: "₹40,000/month",
+    duration: "6 Months",
+    appliedDate: "2026-05-10T14:45:00Z",
+    status: "approved",
+    statusUpdated: "2026-05-18T16:20:00Z",
+    recruiter: {
+      name: "Michael Chen",
+      title: "Research Team Lead",
+      email: "m.chen@openai.com",
+      phone: "+1 (555) 987-6543",
+      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+    },
+    messages: [
+      {
+        id: 1,
+        sender: "recruiter",
+        message: "Hello! We've reviewed your application and are impressed with your ML background. We'd like to schedule a research discussion.",
+        timestamp: "2026-05-18T16:20:00Z",
+      },
+    ],
+  },
+  {
+    id: 3,
+    positionId: 4,
+    positionType: "internship",
+    positionTitle: "Data Science Internship",
+    company: "Microsoft",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+    location: "On-site | Hyderabad",
+    stipend: "₹25,000/month",
+    duration: "3 Months",
+    appliedDate: "2026-05-12T09:00:00Z",
+    status: "pending",
+    statusUpdated: null,
+    recruiter: null,
+    messages: [],
+  },
+  {
+    id: 4,
+    positionId: 6,
+    positionType: "internship",
+    positionTitle: "Backend Engineer Intern",
+    company: "Stripe",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg",
+    location: "Hybrid | Bengaluru",
+    stipend: "₹35,000/month",
+    duration: "6 Months",
+    appliedDate: "2026-05-08T11:20:00Z",
+    status: "rejected",
+    statusUpdated: "2026-05-16T12:00:00Z",
+    recruiter: null,
+    messages: [
+      {
+        id: 1,
+        sender: "recruiter",
+        message: "Thank you for your interest in Stripe. Unfortunately, we've decided to move forward with other candidates at this time.",
+        timestamp: "2026-05-16T12:00:00Z",
+      },
+    ],
+  },
+  {
+    id: 5,
+    positionId: 1,
+    positionType: "internship",
+    positionTitle: "Frontend Developer Internship",
+    company: "Adobe",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo_and_wordmark.svg",
+    location: "Hybrid | Bengaluru",
+    salary: "₹18,000/month",
+    duration: "4 Months",
+    appliedDate: "2026-05-05T16:00:00Z",
+    status: "pending",
+    statusUpdated: null,
+    recruiter: null,
+    messages: [],
+  },
+];
+
+const logoMap = {
+  "Google": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg",
+  "OpenAI": "https://upload.wikimedia.org/wikipedia/commons/1/13/ChatGPT-Logo.png",
+  "Microsoft": "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+  "Stripe": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg",
+  "Adobe": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo_and_wordmark.svg",
+};
+
+const getLogoForCompany = (company) => {
+  return logoMap[company] || "https://via.placeholder.com/40";
+};
+
+export const addApplication = (applicationData) => {
+  const newApp = {
+    id: applicationsHistory.length + 1,
+    positionId: applicationData.position.id,
+    positionType: "internship",
+    positionTitle: applicationData.position.title,
+    company: applicationData.position.company,
+    logo: getLogoForCompany(applicationData.position.company),
+    location: applicationData.position.location || "Remote",
+    stipend: applicationData.position.stipend || applicationData.position.salary || "Negotiable",
+    duration: applicationData.position.duration || "3 Months",
+    appliedDate: new Date().toISOString(),
+    status: "pending",
+    statusUpdated: null,
+    recruiter: null,
+    messages: [],
+  };
+  applicationsHistory.unshift(newApp);
+  return newApp;
+};

@@ -1,4 +1,5 @@
 import { ArrowRight, Crown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function ProCards() {
     return (
@@ -6,10 +7,9 @@ export default function ProCards() {
             <div className="max-w-7xl mx-auto w-full px-6">
                 <div className="flex flex-wrap gap-2">
 
-                    <a
-                        href="/find-a-mentor?price=0:0"
-                        target="_blank"
-                        rel="noreferrer"
+                    <Link
+                        to="/mentorship"
+                        state={{ filter: "Free" }}
                         className="relative flex-1 min-w-[300px] rounded-3xl overflow-hidden flex flex-col justify-between group cursor-pointer"
                         style={{
                             background:
@@ -52,12 +52,11 @@ export default function ProCards() {
 
                         <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-5 transition duration-300 pointer-events-none rounded-3xl" />
                         <div className="absolute left-97  z-10 -bottom-10 w-10 h-14 bg-white rounded-full"></div>
-                    </a>
+                    </Link>
 
-                    <a
-                        href="/find-a-mentor"
-                        target="_blank"
-                        rel="noreferrer"
+                    <Link
+                        to="/mentorship"
+                        state={{ filter: "Pro" }}
                         className="relative flex-1 min-w-[300px] rounded-3xl overflow-hidden flex flex-col justify-between group cursor-pointer"
                         style={{
                             background:
@@ -67,7 +66,6 @@ export default function ProCards() {
                     >
                         <div className="absolute bottom-0 left-0 w-full h-32 bg-purple-300 rounded-t-[100%] opacity-30"></div>
 
-                       
                         <div className="relative z-10 p-10">
                             <h2 className="text-5xl font-black text-gray-900 leading-tight">
                                 <span className="text-purple-700">15%</span> OFF
@@ -96,7 +94,7 @@ export default function ProCards() {
                         </div>
 
                         <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-5 transition duration-300 pointer-events-none rounded-3xl" />
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

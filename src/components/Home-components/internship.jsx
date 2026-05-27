@@ -53,11 +53,11 @@ function getInitials(name) {
 }
 
 const logoColors = [
-  { bg: "bg-amber-400", text: "text-white" },
-  { bg: "bg-indigo-500", text: "text-white" },
-  { bg: "bg-rose-400", text: "text-white" },
-  { bg: "bg-emerald-500", text: "text-white" },
-  { bg: "bg-sky-500", text: "text-white" },
+  { bg: "bg-slate-100", text: "text-slate-600" },
+  { bg: "bg-blue-50",   text: "text-blue-600"  },
+  { bg: "bg-indigo-50", text: "text-indigo-600" },
+  { bg: "bg-slate-100", text: "text-slate-600"  },
+  { bg: "bg-blue-50",   text: "text-blue-600"   },
 ];
 
 function CompanyLogo({ logo, name, idx }) {
@@ -74,7 +74,7 @@ function InternshipCard({ item, idx }) {
   const [saved, setSaved] = useState(false);
 
   return (
-    <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col gap-3" style={{ width: "280px" }}>
+    <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col gap-3 w-full">
 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2.5">
@@ -120,8 +120,7 @@ function InternshipCard({ item, idx }) {
             <StarIcon filled={saved} />
           </button>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-semibold transition-colors duration-150 shadow-sm">
-          <MailIcon />
+        <button className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition-colors duration-150 shadow-sm">
           Apply
         </button>
       </div>
@@ -140,25 +139,13 @@ const internships = [
 
 export default function App() {
   return (
-    <div className="max-w-7xl mx-auto  py-10 px-6">
-      <div className="mb-10 group">
-
-        <div className="inline-block mb-3 rotate-[-3deg]  transition">
-          <span className="px-4 py-1.5 rounded-full bg-indigo-500 text-white text-xs font-semibold shadow-md">
-            🔥 Trending
-          </span>
-        </div>
-
-        <h3 className="text-3xl md:text-4xl font-bold text-slate-900">
-          Internships
-        </h3>
-
-        <p className="text-sm text-slate-500 mt-2">
-          Discover internships from startups and top companies tailored for students.
-        </p>
-
+    <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6">
+      <div className="mb-8 sm:mb-10 group">
+        <p className="text-[11px] font-bold text-indigo-600 uppercase tracking-widest mb-2">Trending</p>
+        <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">Internships</h3>
+        <p className="text-sm text-slate-500 mt-1.5">Discover internships from startups and top companies tailored for students.</p>
       </div>
-      <div className="flex flex-wrap gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {internships.map((item, idx) => (
           <InternshipCard key={idx} item={item} idx={idx} />
         ))}

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Mail } from "lucide-react";
 
 const MapPinIcon = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -52,11 +51,11 @@ function getInitials(name) {
 }
 
 const logoColors = [
-  "bg-amber-400",
-  "bg-indigo-500",
-  "bg-rose-400",
-  "bg-emerald-500",
-  "bg-sky-500"
+  "bg-slate-100 text-slate-600",
+  "bg-blue-50 text-blue-600",
+  "bg-indigo-50 text-indigo-600",
+  "bg-slate-100 text-slate-600",
+  "bg-blue-50 text-blue-600",
 ];
 
 function CompanyLogo({ logo, name, idx }) {
@@ -72,71 +71,66 @@ function CompanyLogo({ logo, name, idx }) {
   }
 
   return (
-    <div className={`w-10 h-10 rounded-xl ${logoColors[idx % 5]} text-white flex items-center justify-center text-sm font-bold`}>
+    <div className={`w-10 h-10 rounded-xl ${logoColors[idx % 5]} flex items-center justify-center text-sm font-bold`}>
       {getInitials(name)}
     </div>
   );
 }
-
 
 function CompetitionCard({ item, idx }) {
 
   const [saved, setSaved] = useState(false);
 
   return (
-    <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col gap-3 w-[280px]">
+    <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col w-full">
 
-      <div className="flex items-center justify-between">
-
+      {/* Header */}
+      <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2.5">
           <CompanyLogo logo={item.logo} name={item.org} idx={idx}/>
-          <span className="text-sm font-semibold text-slate-700">
-            {item.org}
-          </span>
+          <span className="text-sm font-semibold text-slate-700">{item.org}</span>
         </div>
-
         {item.isNew && (
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200">
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-200 flex-shrink-0">
             New
           </span>
         )}
-
       </div>
 
-      <div className="border-t border-slate-100"/>
+      <div className="border-t border-slate-100 mb-3"/>
 
-      <h4 className="text-base font-bold text-slate-900 leading-snug">
+      {/* Title — fixed min-height so all cards align below it */}
+      <h4 className="text-base font-bold text-slate-900 leading-snug mb-3 min-h-[48px]">
         {item.title}
       </h4>
 
-      <div className="flex flex-wrap gap-2">
+      {/* Tags */}
+      <div className="flex flex-wrap gap-2 mb-2">
         <Tag icon={<MapPinIcon />} label={item.location}/>
         <Tag icon={<TagIcon />} label={item.type}/>
         <Tag icon={<CalendarIcon />} label={item.deadline}/>
       </div>
 
-      {item.prize && (
-        <div className="flex flex-wrap gap-2">
+      {/* Prize — always takes up space, hidden when absent */}
+      <div className="mb-3 min-h-[32px] flex items-center">
+        {item.prize ? (
           <Tag icon={<TrophyIcon />} label={item.prize}/>
-        </div>
-      )}
+        ) : null}
+      </div>
 
-      <div className="border-t border-slate-100"/>
+      <div className="border-t border-slate-100 mb-3"/>
 
-      <div className="flex items-center justify-between">
-
+      {/* Footer — always at bottom */}
+      <div className="flex items-center justify-between mt-auto">
         <button
           onClick={() => setSaved(s => !s)}
-          className="text-sm text-slate-500 hover:text-indigo-500"
+          className="text-sm text-slate-400 hover:text-indigo-500 transition-colors"
         >
           <StarIcon filled={saved}/>
         </button>
-
-        <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-semibold shadow-sm">
-          <Mail/>
+        <button className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold shadow-sm transition-colors">
           Register
         </button>
-
       </div>
 
     </div>
@@ -191,27 +185,15 @@ const competitions = [
 export default function CompetitionsSection() {
 
   return (
-    <div className="max-w-7xl mx-auto py-10 px-6">
+    <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6">
 
-      <div className="mb-10">
-
-        <div className="inline-block mb-3 rotate-[-3deg]">
-          <span className="px-4 py-1.5 rounded-full bg-indigo-500 text-white text-xs font-semibold shadow-md">
-            🏆 Trending
-          </span>
-        </div>
-
-        <h3 className="text-3xl md:text-4xl font-bold text-slate-900">
-          Competitions
-        </h3>
-
-        <p className="text-sm text-slate-500 mt-2">
-          Participate in competitions from universities and organizations worldwide.
-        </p>
-
+      <div className="mb-8 sm:mb-10">
+        <p className="text-[11px] font-bold text-indigo-600 uppercase tracking-widest mb-2">Trending</p>
+        <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">Competitions</h3>
+        <p className="text-sm text-slate-500 mt-1.5">Participate in competitions from universities and organizations worldwide.</p>
       </div>
 
-      <div className="flex flex-wrap gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {competitions.map((item, idx) => (
           <CompetitionCard key={idx} item={item} idx={idx}/>
         ))}

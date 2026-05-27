@@ -5,45 +5,7 @@ const CARD_W = 395 + 16;
 
 const reviews = [
     {
-        mentorName: "Vedansh Dubey",
-        mentorPhoto:
-            "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/66e689b11a7f1.webp",
-        mentorOrg: "Xavier Institute of Management (XIMB), Bhubaneswar",
-        isTopMentor: true,
-        reviewText:
-            "I recently had the opportunity to attend a mentoring session with Vedansh, and it was extremely insightful and helpful.",
-        menteeName: "Oktrido Asrialdi",
-        menteePhoto:
-            "https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/user-avatar/png/33.png",
-        stars: 2,
-    },
-    {
-        mentorName: "Chirag Chaudhari",
-        mentorPhoto:
-            "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/63dd342995273.jpg",
-        mentorOrg: "Edelweiss Life Insurance",
-        isTopMentor: false,
-        reviewText:
-            "I recently attended an MBA CET preparation session, and it was definitely worth it.",
-        menteeName: "Jayesh Vispute",
-        menteePhoto:
-            "https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/user-avatar/png/2.png",
-        stars: 5,
-    },
-    {
-        mentorName: "Palak Gupta",
-        mentorPhoto:
-            "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/65e2d4ade1037.webp",
-        mentorOrg: "Accenture Strategy",
-        isTopMentor: true,
-        reviewText:
-            "Palak is an amazing mentor! She really helped me with my interview prep.",
-        menteeName: "Aparna Suresh",
-        menteePhoto:
-            "https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/user-avatar/png/22.png",
-        stars: 5,
-    },
-    {
+        mentorId: 1,
         mentorName: "Vedansh Dubey",
         mentorPhoto:
             "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/66e689b11a7f1.webp",
@@ -57,6 +19,7 @@ const reviews = [
         stars: 5,
     },
     {
+        mentorId: 3,
         mentorName: "Chirag Chaudhari",
         mentorPhoto:
             "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/63dd342995273.jpg",
@@ -70,45 +33,7 @@ const reviews = [
         stars: 5,
     },
     {
-        mentorName: "Palak Gupta",
-        mentorPhoto:
-            "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/65e2d4ade1037.webp",
-        mentorOrg: "Accenture Strategy",
-        isTopMentor: true,
-        reviewText:
-            "Palak is an amazing mentor! She really helped me with my interview prep.",
-        menteeName: "Aparna Suresh",
-        menteePhoto:
-            "https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/user-avatar/png/22.png",
-        stars: 5,
-    },
-    {
-        mentorName: "Vedansh Dubey",
-        mentorPhoto:
-            "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/66e689b11a7f1.webp",
-        mentorOrg: "Xavier Institute of Management (XIMB), Bhubaneswar",
-        isTopMentor: true,
-        reviewText:
-            "I recently had the opportunity to attend a mentoring session with Vedansh, and it was extremely insightful and helpful.",
-        menteeName: "Oktrido Asrialdi",
-        menteePhoto:
-            "https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/user-avatar/png/33.png",
-        stars: 5,
-    },
-    {
-        mentorName: "Chirag Chaudhari",
-        mentorPhoto:
-            "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/63dd342995273.jpg",
-        mentorOrg: "Edelweiss Life Insurance",
-        isTopMentor: false,
-        reviewText:
-            "I recently attended an MBA CET preparation session, and it was definitely worth it.",
-        menteeName: "Jayesh Vispute",
-        menteePhoto:
-            "https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/user-avatar/png/2.png",
-        stars: 5,
-    },
-    {
+        mentorId: 4,
         mentorName: "Palak Gupta",
         mentorPhoto:
             "https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/65e2d4ade1037.webp",

@@ -17,7 +17,7 @@ const ProfileLeftPanel = ({ activeSection, setActiveSection }) => {
   const progress = 59
 
   return (
-    <div className="w-full h-full flex flex-col gap-5">
+    <div className="w-[95%] h-full flex flex-col pl-5 pt-5 pb-5 gap-5">
 
       <div className="relative bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl px-4 py-4 text-white hover:shadow-lg transition cursor-pointer overflow-hidden">
         <img
